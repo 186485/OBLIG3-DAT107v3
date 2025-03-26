@@ -2,19 +2,32 @@ package no.dat107.oblig3;
 
 import java.time.LocalDate;
 
+import javax.swing.JOptionPane;
+
 public class Main {
 
     public static void main(String[] args) {
 
-        AnsattDAO ansattDAO = new AnsattDAO();
+    	AnsattDAO ansattDAO = new AnsattDAO();
+   
 
-        Ansatt ansatt = new Ansatt("Andreas", "AndyInnebandy03", "Kaartinen", LocalDate.of(2020, 1, 1), "Utvikler", 60000.0);
-        System.out.println(ansatt);
 
-        
-        int id = ansattDAO.saveAnsatt(ansatt);;
-        System.out.println(ansatt);
-        
-        System.out.println("Returnert ID: " + id);
+    	
+    	Meny.start();
+    	
+    	
+           
+
+//        Ansatt ansatt = new Ansatt("Andreas", "Ak", "Kaartinen", LocalDate.of(2020, 1, 1), "Utvikler", 60000.0);
+//        System.out.println(ansatt);
+//
+//        
+//        int id = ansattDAO.saveAnsatt(ansatt); //For å lagre inputs!!
+//        System.out.println(ansatt);
+//        
+//        System.out.println("Returnert ID: " + id);
+//        
+//        System.out.print(ansattDAO.finnAnsattMedId(2));
+    	//ansattDAO.deleteAnsatt(ansattDAO.finnAnsattMedId(3));
     }
 }

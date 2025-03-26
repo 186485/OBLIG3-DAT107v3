@@ -9,7 +9,7 @@ import jakarta.persistence.Id;
 import jakarta.persistence.Table;
 
 @Entity
-@Table(schema = "oblig3")  // Sett schema her
+@Table(schema = "oblig3")  
 public class Ansatt {
 
     @Id
@@ -37,7 +37,7 @@ public class Ansatt {
 
     @Override
     public String toString() {
-        return String.format("Ansatt [id=%d, navn=%s, brukernavn=%s, etternavn=%s, ansettelse=%s, stilling=%s, monedslonn=%.2f]", 
+        return String.format("Ansatt [id=%d, navn=%s, brukernavn=%s, etternavn=%s, ansettelse=%s, stilling=%s, monedslonn=%.2f ] \n", 
             id, navn, brukernavn, etternavn, ansettelse, stilling, monedslonn);
     }
 

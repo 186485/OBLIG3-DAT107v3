@@ -1,11 +1,14 @@
 package no.dat107.oblig3;
 
+import java.util.ArrayList;
 import java.util.List;
 import jakarta.persistence.EntityManager;
 import jakarta.persistence.EntityManagerFactory;
 import jakarta.persistence.EntityTransaction;
+import jakarta.persistence.NoResultException;
 import jakarta.persistence.Persistence;
 import jakarta.persistence.TypedQuery;
+
 
 public class AnsattDAO {
 
@@ -92,5 +95,33 @@ public class AnsattDAO {
         } finally {
             em.close();
         }
+    }
+    
+    public Ansatt finnAnsattMedId(int id) {
+
+        EntityManager em = emf.createEntityManager();
+
+        Ansatt ansatt = null;
+        try {
+            ansatt = em.find(Ansatt.class, id);
+        } finally {
+            em.close();
+        }
+        return ansatt;
+    }
+    
+    public List<Ansatt> finnAnsatteMedBrukernavn(String brukernavn) {
+        EntityManager em = emf.createEntityManager();
+        List<Ansatt> ansatte = new ArrayList<>();
+
+        try {
+            ansatte = em.createQuery("SELECT a FROM Ansatt a WHERE a.brukernavn = :brukernavn", Ansatt.class)
+                        .setParameter("brukernavn", brukernavn)
+                        .getResultList();
+        } finally {
+            em.close();
+        }
+
+        return ansatte;
     }
 }
