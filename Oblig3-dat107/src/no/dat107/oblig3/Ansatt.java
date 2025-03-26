@@ -1,0 +1,100 @@
+package no.dat107.oblig3;
+
+import java.time.LocalDate;
+
+import jakarta.persistence.Entity;
+import jakarta.persistence.GeneratedValue;
+import jakarta.persistence.GenerationType;
+import jakarta.persistence.Id;
+import jakarta.persistence.Table;
+
+@Entity
+@Table(schema = "oblig3")  // Sett schema her
+public class Ansatt {
+
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)  // Automatisk ID-generering
+    private Integer id;
+    private String navn;
+    private String brukernavn;
+    private String etternavn;
+    private LocalDate ansettelse;  // Ansettelsesdato
+    private String stilling;
+    private Double monedslonn;  // Månedslønn
+
+    // Standard konstruktør
+    public Ansatt() {}
+
+    // Konstruktør for å sette alle feltene
+    public Ansatt(String navn, String brukernavn, String etternavn, LocalDate ansettelse, String stilling, Double monedslonn) {
+        this.navn = navn;
+        this.brukernavn = brukernavn;
+        this.etternavn = etternavn;
+        this.ansettelse = ansettelse;
+        this.stilling = stilling;
+        this.monedslonn = monedslonn;
+    }
+
+    @Override
+    public String toString() {
+        return String.format("Ansatt [id=%d, navn=%s, brukernavn=%s, etternavn=%s, ansettelse=%s, stilling=%s, monedslonn=%.2f]", 
+            id, navn, brukernavn, etternavn, ansettelse, stilling, monedslonn);
+    }
+
+    public int getId() {
+        return id;
+    }
+
+    public String getNavn() {
+        return navn;
+    }
+
+    public void setNavn(String navn) {
+        this.navn = navn;
+    }
+
+	public String getBrukernavn() {
+		return brukernavn;
+	}
+
+	public void setBrukernavn(String brukernavn) {
+		this.brukernavn = brukernavn;
+	}
+
+	public String getEtternavn() {
+		return etternavn;
+	}
+
+	public void setEtternavn(String etternavn) {
+		this.etternavn = etternavn;
+	}
+
+	public LocalDate getAnsettelse() {
+		return ansettelse;
+	}
+
+	public void setAnsettelse(LocalDate ansettelse) {
+		this.ansettelse = ansettelse;
+	}
+
+	public String getStilling() {
+		return stilling;
+	}
+
+	public void setStilling(String stilling) {
+		this.stilling = stilling;
+	}
+
+	public Double getMonedslonn() {
+		return monedslonn;
+	}
+
+	public void setMonedslonn(Double monedslonn) {
+		this.monedslonn = monedslonn;
+	}
+
+	public void setId(Integer id) {
+		this.id = id;
+	}
+    
+}
