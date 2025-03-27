@@ -10,6 +10,7 @@ import jakarta.persistence.Persistence;
 import jakarta.persistence.TypedQuery;
 
 
+
 public class AnsattDAO {
 
     private EntityManagerFactory emf;
@@ -124,4 +125,6 @@ public class AnsattDAO {
 
         return ansatte;
     }
+
+    
 }

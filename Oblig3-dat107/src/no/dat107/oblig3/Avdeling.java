@@ -1,60 +1,49 @@
 package no.dat107.oblig3;
 
 import java.util.List;
-
-import jakarta.persistence.Entity;
-import jakarta.persistence.GeneratedValue;
-import jakarta.persistence.GenerationType;
-import jakarta.persistence.Id;
-import jakarta.persistence.JoinColumn;
-import jakarta.persistence.JoinTable;
-import jakarta.persistence.ManyToMany;
-import jakarta.persistence.Table;
+import jakarta.persistence.*;
 
 @Entity
-@Table(schema = "oblig3")
+@Table(name = "avdeling", schema = "oblig3")
 public class Avdeling {
+    
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private int id;
-    private String navn;
     
-    @ManyToMany
-    @JoinTable(
-            name = "oblig3.ansattdeltagelse", // NB! Må ha med schema !!!
-            joinColumns = @JoinColumn(name="avdelingid"),
-            inverseJoinColumns = @JoinColumn(name="ansattid"))
+    private String navn;
+
+    @OneToMany(mappedBy = "avdeling", cascade = CascadeType.ALL, fetch = FetchType.LAZY)
     private List<Ansatt> ansatte;
     
+    public Avdeling() {}
+
+    public Avdeling(String navn) {
+        this.navn = navn;
+    }
+
     public int getId() {
-		return id;
-	}
-
-    public void skrivUt(String innrykk) {
-        System.out.printf("%sProsjekt nr %d: %s", innrykk, id, navn);
+        return id;
     }
-    
+
+    public String getNavn() {
+        return navn;
+    }
+
+    public void setNavn(String navn) {
+        this.navn = navn;
+    }
+
+    public List<Ansatt> getAnsatte() {
+        return ansatte;
+    }
+
     public void skrivUtMedAnsatte() {
-        System.out.println();
-        skrivUt("");
-        ansatte.forEach(a -> a.toString());
+        System.out.println("\nAvdeling: " + navn);
+        if (ansatte != null) {
+            for (Ansatt a : ansatte) {
+                System.out.println(" - " + a.getNavn());
+            }
+        }
     }
-
-    public void leggTilAnsatt(Ansatt a) {
-        ansatte.add(a);
-    }
-
-    public void fjernAnsatt(Ansatt a) {
-        ansatte.remove(a);
-    }
-
-	public String getNavn() {
-		return navn;
-	}
-
-	public void setNavn(String navn) {
-		this.navn = navn;
-	}
-    
 }
-

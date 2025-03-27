@@ -6,6 +6,8 @@ import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
+import jakarta.persistence.JoinColumn;
+import jakarta.persistence.ManyToOne;
 import jakarta.persistence.Table;
 
 @Entity
@@ -21,24 +23,30 @@ public class Ansatt {
     private LocalDate ansettelse;  // Ansettelsesdato
     private String stilling;
     private Double monedslonn;  // Månedslønn
+ 
+    @ManyToOne
+    @JoinColumn(name = "avdeling_id", nullable = false)
+    private Avdeling avdeling;
+    
 
     // Standard konstruktør
     public Ansatt() {}
 
     // Konstruktør for å sette alle feltene
-    public Ansatt(String navn, String brukernavn, String etternavn, LocalDate ansettelse, String stilling, Double monedslonn) {
+    public Ansatt(String navn, String brukernavn, String etternavn, LocalDate ansettelse, String stilling, Double monedslonn, Avdeling avdeling) {
         this.navn = navn;
         this.brukernavn = brukernavn;
         this.etternavn = etternavn;
         this.ansettelse = ansettelse;
         this.stilling = stilling;
         this.monedslonn = monedslonn;
+        this.avdeling = avdeling;
     }
 
     @Override
     public String toString() {
-        return String.format("Ansatt [id=%d, navn=%s, brukernavn=%s, etternavn=%s, ansettelse=%s, stilling=%s, monedslonn=%.2f ] \n", 
-            id, navn, brukernavn, etternavn, ansettelse, stilling, monedslonn);
+        return String.format("Ansatt [id=%d, navn=%s, brukernavn=%s, etternavn=%s, ansettelse=%s, stilling=%s, monedslonn=%.2f, avdeling=%s ] \n", 
+            id, navn, brukernavn, etternavn, ansettelse, stilling, monedslonn, avdeling.getNavn());
     }
 
     public int getId() {
@@ -96,5 +104,9 @@ public class Ansatt {
 	public void setId(Integer id) {
 		this.id = id;
 	}
+	
+    public Avdeling getAvdeling() {
+        return avdeling;
+    }
     
 }

@@ -78,25 +78,52 @@ public class Meny {
     	}
     	break;
     case 6:
-    	String navn;
-    	String initialer;
-    	String etternavn;
+     
+        String navn;
+        String initialer;
+        String etternavn;
         LocalDate ansettelse = LocalDate.now();
         String stilling;
         double lonn;
+
         
-        navn = JOptionPane.showInputDialog("Oppgi fornavn");
-        initialer = JOptionPane.showInputDialog("Oppgi initialer");
-        etternavn = JOptionPane.showInputDialog("Oppgi etternavn");
-        JOptionPane.showMessageDialog(null, "Dato idag: "+ ansettelse);
-        stilling = JOptionPane.showInputDialog("Oppgi stilling");
-        String lonnTXT = JOptionPane.showInputDialog("Oppgi lonn");
+        AnsattDAO ansattDAO1 = new AnsattDAO();
+        AvdelingDAO avdelingDAO = new AvdelingDAO();
+
+        
+        navn = JOptionPane.showInputDialog("Oppgi fornavn:");
+        initialer = JOptionPane.showInputDialog("Oppgi initialer:");
+        etternavn = JOptionPane.showInputDialog("Oppgi etternavn:");
+        JOptionPane.showMessageDialog(null, "Dato idag: " + ansettelse);
+        stilling = JOptionPane.showInputDialog("Oppgi stilling:");
+        String lonnTXT = JOptionPane.showInputDialog("Oppgi lønn:");
         lonn = Double.parseDouble(lonnTXT);
-        Ansatt ansatt4 = new Ansatt(navn, initialer, etternavn, ansettelse, stilling, lonn);
-        AnsattDAO ansattDAO4 = new AnsattDAO();
-        ansattDAO4.saveAnsatt(ansatt4);
-        JOptionPane.showMessageDialog(null, "Du har nå lagt til denne ansatte: \n"+ansatt4.toString());
+
+      
+        String avdIdTXT = JOptionPane.showInputDialog("Oppgi avdeling ID:");
+        int avdId = Integer.parseInt(avdIdTXT);
+        
+        
+        Avdeling avdeling = avdelingDAO.finnAvdelingMedId(avdId);
+
+        
+        if (avdeling == null) {
+            JOptionPane.showMessageDialog(null, "Ugyldig avdeling ID. Ansatt ble ikke lagt til.");
+            break;
+        }
+
+      
+        Ansatt nyAnsatt = new Ansatt(navn, initialer, etternavn, ansettelse, stilling, lonn, avdeling);
+
+     
+        ansattDAO1.saveAnsatt(nyAnsatt);
+
+        
+        JOptionPane.showMessageDialog(null, "Du har nå lagt til denne ansatte: \n" + nyAnsatt.toString());
         break;
+        
+        
+        
         
     default:
         JOptionPane.showMessageDialog(null, "Ugyldig valg. Prøv igjen.");
