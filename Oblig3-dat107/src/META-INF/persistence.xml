@@ -8,6 +8,7 @@
 	<persistence-unit name="oblig3" transaction-type="RESOURCE_LOCAL">
 	
 		<class>no.dat107.oblig3.Ansatt</class>
+		<class>no.dat107.oblig3.Avdeling</class>
 		
 		<properties>
 		    <!--  Generelle JPA properties -->
