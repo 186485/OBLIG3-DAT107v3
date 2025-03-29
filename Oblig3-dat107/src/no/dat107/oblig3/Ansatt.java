@@ -45,8 +45,11 @@ public class Ansatt {
 
     @Override
     public String toString() {
-        return String.format("Ansatt [id=%d, navn=%s, brukernavn=%s, etternavn=%s, ansettelse=%s, stilling=%s, monedslonn=%.2f, avdeling=%s ] \n", 
+        String utskrift = String.format("Ansatt (id=%d, navn=%s, brukernavn=%s, etternavn=%s, ansettelse=%s, stilling=%s, monedslonn=%.2f, avdeling=%s ) \n", 
             id, navn, brukernavn, etternavn, ansettelse, stilling, monedslonn, avdeling.getNavn());
+        
+        
+        return utskrift;
     }
 
     public int getId() {
@@ -107,6 +110,9 @@ public class Ansatt {
 	
     public Avdeling getAvdeling() {
         return avdeling;
+    }
+    public void setAvdeling(Avdeling avdeling) {
+        this.avdeling = avdeling;
     }
     
 }

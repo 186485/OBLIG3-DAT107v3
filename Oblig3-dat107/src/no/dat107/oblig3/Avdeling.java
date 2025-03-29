@@ -12,9 +12,12 @@ public class Avdeling {
     private int id;
     
     private String navn;
-
+    
     @OneToMany(mappedBy = "avdeling", cascade = CascadeType.ALL, fetch = FetchType.LAZY)
     private List<Ansatt> ansatte;
+    
+    @Column(name = "sjef")
+    private Integer sjef;
     
     public Avdeling() {}
 
@@ -38,12 +41,23 @@ public class Avdeling {
         return ansatte;
     }
 
-    public void skrivUtMedAnsatte() {
+    public Integer getSjef() {
+        return sjef;
+    }
+    public void setSjef(Integer sjef) {
+    	this.sjef = sjef;
+    }
+    
+
+
+	public void skrivUtMedAnsatte() {
         System.out.println("\nAvdeling: " + navn);
         if (ansatte != null) {
             for (Ansatt a : ansatte) {
                 System.out.println(" - " + a.getNavn());
             }
         }
-    }
+        
+    }    
+    
 }

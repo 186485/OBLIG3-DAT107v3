@@ -125,6 +125,58 @@ public class AnsattDAO {
 
         return ansatte;
     }
+    public List<Ansatt> finnAnsattIAvdeling(int avdeling_id) {
+        EntityManager em = emf.createEntityManager();
+        List<Ansatt> ansatteAvd = new ArrayList<>();
 
+        try {
+            ansatteAvd = em.createQuery(
+                "SELECT a FROM Ansatt a WHERE a.avdeling.id = :avdeling_id", Ansatt.class)
+                .setParameter("avdeling_id", avdeling_id)
+                .getResultList();
+        } finally {
+            em.close();
+        }
+
+        return ansatteAvd;
+    }
     
+    
+    public Ansatt finnSjefForAvdeling(int avdelingId) {
+        EntityManager em = emf.createEntityManager();
+
+        Ansatt sjef = null;
+        try {
+            
+            String queryString = "SELECT a FROM Ansatt a WHERE a.avdeling.id = :avdelingId AND a.id = a.avdeling.sjef.id";
+            TypedQuery<Ansatt> query = em.createQuery(queryString, Ansatt.class);
+            query.setParameter("avdelingId", avdelingId);
+            sjef = query.getSingleResult();
+        } catch (NoResultException e) {
+            System.out.println("Ingen sjef funnet for avdelingen.");
+        } finally {
+            em.close();
+        }
+        
+        return sjef;
+    }
+    
+    public void oppdaterAvdeling(int ansattId, int nyAvdId) {
+        EntityManager em = emf.createEntityManager();
+        try {
+            em.getTransaction().begin();
+            Ansatt ansatt = em.find(Ansatt.class, ansattId);
+            if (ansatt != null) {
+                Avdeling nyAvdeling = em.find(Avdeling.class, nyAvdId);
+                if (nyAvdeling != null) {
+                    ansatt.setAvdeling(nyAvdeling); 
+                    em.merge(ansatt); 
+                    em.getTransaction().commit();
+                }
+            }
+        } finally {
+            em.close();
+        }
+    }
+//    
 }
