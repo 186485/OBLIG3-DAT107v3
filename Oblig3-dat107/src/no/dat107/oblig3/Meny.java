@@ -138,24 +138,20 @@ public class Meny {
 				AnsattDAO ansattDAO8 = new AnsattDAO();
 				AvdelingDAO avdelingDAO8 = new AvdelingDAO();
 
-				// Spør bruker om ansattnr
 				String ansattIdTxt2 = JOptionPane.showInputDialog("Oppgi ansattID:");
 				int ansattId8 = Integer.parseInt(ansattIdTxt2);
 
-				// Henter riktig ansatt
 				Ansatt ansatt8 = ansattDAO8.finnAnsattMedId(ansattId8);
 				if (ansatt8 == null) {
 					JOptionPane.showMessageDialog(null, "Ansatt ikke funnet!");
 					break;
 				}
 
-				// Sjekk om de er sjef, kan ikke bytte for sjefen
 				if (avdelingDAO8.erAnsattSjef(ansattId8)) {
 					JOptionPane.showMessageDialog(null, "Ansatte du har valgt er sjef, prøv igjen!");
 					break;
 				}
 
-				// Hent ny avdeling
 				String nyAvdTxt = JOptionPane.showInputDialog("Oppgi ny avdelings-ID:");
 				int nyAvdId = Integer.parseInt(nyAvdTxt);
 				Avdeling nyAvdeling = avdelingDAO8.finnAvdelingMedId(nyAvdId);
@@ -164,7 +160,7 @@ public class Meny {
 					JOptionPane.showMessageDialog(null, "Ugyldig avdelings-ID.");
 					break;
 				}
-				// Oppdatere ansatt / flytte over til ny valgt avdeling
+
 				ansattDAO8.oppdaterAvdeling(ansattId8, nyAvdId);
 				JOptionPane.showMessageDialog(null,
 						ansatt8.toString() + "\n er nå flyttet til avdeling med id " + nyAvdTxt);
@@ -215,11 +211,9 @@ public class Meny {
 				int prosjektID = Integer.parseInt(prosjektIDSTR);
 				int timer = Integer.parseInt(timerSTR);
 
-				// Hent ansatt og prosjekt fra databasen
 				Ansatt ansatt11 = ansattDAO11.finnAnsattMedId(ansattID);
 				Prosjekt prosjekt11 = prosjektDAO11.finnProsjektMedId(prosjektID);
 
-				// Sjekk at ansatt og prosjekt faktisk finnes
 				if (ansatt11 == null) {
 					JOptionPane.showMessageDialog(null, "Fant ikke ansatt med ID: " + ansattID);
 					return;
@@ -229,10 +223,8 @@ public class Meny {
 					return;
 				}
 
-				// Opprett prosjektdeltagelse
 				ProsjektDeltagelse deltagelse11 = new ProsjektDeltagelse(ansatt11, prosjekt11, timer, rolle);
 
-				// Lagre prosjektdeltagelsen i databasen
 				ProsjektDeltagelseDAO deltagelseDAO11 = new ProsjektDeltagelseDAO();
 				deltagelseDAO11.lagreProsjektDeltagelse(deltagelse11);
 
