@@ -9,6 +9,8 @@
 	
 		<class>no.dat107.oblig3.Ansatt</class>
 		<class>no.dat107.oblig3.Avdeling</class>
+		<class>no.dat107.oblig3.Prosjekt</class>
+		<class>no.dat107.oblig3.ProsjektDeltagelse</class>
 		
 		<properties>
 		    <!--  Generelle JPA properties -->

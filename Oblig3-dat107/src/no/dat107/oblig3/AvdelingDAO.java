@@ -84,8 +84,7 @@ public class AvdelingDAO {
             if (sjef == null) {
                 throw new IllegalArgumentException("Fant ikke ansatt med ID: " + sjefId);
             }
-            //Viktig å bruke metoden i main å sjekke at ansatt ikke er sjef allerede, for å evt returnere feil
-            // Opprett ny avdeling med sjef
+           
             Avdeling nyAvdeling = new Avdeling();
             nyAvdeling.setNavn(avdelingsNavn);
             nyAvdeling.setSjef(sjef.getId());

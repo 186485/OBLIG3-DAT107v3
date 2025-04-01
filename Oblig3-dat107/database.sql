@@ -48,5 +48,23 @@ UPDATE oblig3.avdeling SET sjef = 4 WHERE id = 1; -- Erik som sjef for Helse
 UPDATE oblig3.avdeling SET sjef = 5 WHERE id = 2; -- Hanne som sjef for IT
 UPDATE oblig3.avdeling SET sjef = 6 WHERE id = 3; -- Per som sjef for Vaske
 
+-- Opprett prosjekt tabeller osv
+CREATE TABLE IF NOT EXISTS oblig3.prosjekt (
+    id SERIAL PRIMARY KEY,
+    navn VARCHAR(100) NOT NULL,
+    beskrivelse varchar(255) not null
+);
+
+CREATE TABLE IF NOT EXISTS oblig3.prosjektdeltagelse (
+    deltagelseid SERIAL PRIMARY KEY,
+    ansattid INT NOT NULL,
+    prosjektid INT NOT NULL,
+    timer INT NOT NULL,
+    rolle VARCHAR(100) NOT NULL,
+    FOREIGN KEY (ansattid) REFERENCES oblig3.ansatt(id) ON DELETE CASCADE,
+    FOREIGN KEY (prosjektid) REFERENCES oblig3.prosjekt(id) ON DELETE CASCADE
+);
+
+
 
   
