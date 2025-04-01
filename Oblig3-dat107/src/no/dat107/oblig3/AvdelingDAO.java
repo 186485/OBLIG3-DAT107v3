@@ -79,7 +79,7 @@ public class AvdelingDAO {
         try {
             tx.begin();
             
-            // Hent den ansatte som da blir sjef
+            
             Ansatt sjef = em.find(Ansatt.class, sjefId);
             if (sjef == null) {
                 throw new IllegalArgumentException("Fant ikke ansatt med ID: " + sjefId);
@@ -91,7 +91,7 @@ public class AvdelingDAO {
 
             em.persist(nyAvdeling);
 
-            // Oppdater sjefens avdeling til den nye
+            
             sjef.setAvdeling(nyAvdeling);
             em.merge(sjef);
 

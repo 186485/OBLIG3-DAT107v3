@@ -35,7 +35,7 @@ public class ProsjektDAO {
 		try {
 			tx.begin();
 
-			// Opprett nytt prosjekt
+			
 			Prosjekt nyttProsjekt = new Prosjekt();
 			nyttProsjekt.setNavn(prosjektNavn);
 			nyttProsjekt.setBeskrivelse(beskrivelse);

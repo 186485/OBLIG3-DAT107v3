@@ -17,8 +17,7 @@ public class Meny {
 							+ "5: Oppdater ansatt sin lønn\n" + "6: Legge til en ny ansatt\n" + "7: Søk på avdeling\n"
 							+ "8: Flytt ansatte til ny avdeling\n" + "9: Lag ny avdeling\n" + "10: Lag nytt prosjekt \n"
 							+ "11: Legg til prosjektdeltagelse \n" + "12: Oppdater total timer jobbet i prosjekt: \n"
-							+"13: Vis informasjon om ett prosjekt \n"
-							+ "Ditt valg:");
+							+ "13: Vis informasjon om ett prosjekt \n" + "Ditt valg:");
 
 			if (valgStr == null || valgStr.isEmpty()) {
 				break;
@@ -286,30 +285,30 @@ public class Meny {
 								+ prosjekt12.getNavn() + " er oppdatert til " + ansattTimer + " timer.");
 
 				break;
-				
-		case 13:
-			ProsjektDAO prosjektDAO13 = new ProsjektDAO();
-			ProsjektDeltagelseDAO deltagelse13 = new ProsjektDeltagelseDAO();
-			String prosjektNR13STR = JOptionPane.showInputDialog("Skriv inn prosjektID:");
-			int prosjektNR13 = Integer.parseInt(prosjektNR13STR);
 
-			Prosjekt prosjekt13 = prosjektDAO13.finnProsjektMedId(prosjektNR13);
+			case 13:
+				ProsjektDAO prosjektDAO13 = new ProsjektDAO();
+				ProsjektDeltagelseDAO deltagelse13 = new ProsjektDeltagelseDAO();
+				String prosjektNR13STR = JOptionPane.showInputDialog("Skriv inn prosjektID:");
+				int prosjektNR13 = Integer.parseInt(prosjektNR13STR);
 
-			
-			if (prosjekt13 != null) {
-				int prosjektid13 = prosjekt13.getId();
-				JOptionPane.showMessageDialog(null,"Navn: "+ prosjekt13.getNavn()+"\nBeskrivelse: "+ prosjekt13.getBeskrivelse()+"\n"
-						+ deltagelse13.finnAlleDeltagelserForProsjekt(prosjektid13));
-			} else {
-			   JOptionPane.showMessageDialog(null, "ProsjektID ikke funnet");
-			   break;
-		
-			}
-			break;
-			
-		default:
-			JOptionPane.showMessageDialog(null, "Tallet er ikke en mulighet!");
-			break;
+				Prosjekt prosjekt13 = prosjektDAO13.finnProsjektMedId(prosjektNR13);
+
+				if (prosjekt13 != null) {
+					int prosjektid13 = prosjekt13.getId();
+					JOptionPane.showMessageDialog(null,
+							"Navn: " + prosjekt13.getNavn() + "\nBeskrivelse: " + prosjekt13.getBeskrivelse() + "\n"
+									+ deltagelse13.finnAlleDeltagelserForProsjekt(prosjektid13));
+				} else {
+					JOptionPane.showMessageDialog(null, "ProsjektID ikke funnet");
+					break;
+
+				}
+				break;
+
+			default:
+				JOptionPane.showMessageDialog(null, "Tallet er ikke en mulighet!");
+				break;
 
 			}
 
